@@ -1,0 +1,266 @@
+
+**** Error file opened at 20180808 171643 China Standard Time Rel 3.0.7 (2011-04-20) [720.38]
+Error:  >Wed Aug 08 17:16:43,922<    RfcException: [null]
+    message: Connect to SAP gateway failed
+Connection parameters: TYPE=A DEST=MES ASHOST=10.86.95.121 SYSNR=00 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.86.95.121:3300' not reached
+TIME        Wed Aug 08 17:16:43 2018
+RELEASE     720
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      nixxi.cpp
+LINE        3255
+DETAIL      NiPConnect2: 10.86.95.121:3300
+SYSTEM CALL connect
+ERRNO       10060
+ERRNO TEXT  WSAETIMEDOUT: Connection timed out
+COUNTER     2
+
+    Return code: RFC_FAILURE(1)
+    error group: 102
+    key: RFC_ERROR_COMMUNICATION
+
+
+**** Error file opened at 20180808 205302 China Standard Time Rel 3.0.7 (2011-04-20) [720.38]
+Error:  >Wed Aug 08 20:53:02,930<    RfcException: [null]
+    message: Connect to SAP gateway failed
+Connection parameters: TYPE=A DEST=MES ASHOST=10.86.95.121 SYSNR=00 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.86.95.121:3300' not reached
+TIME        Wed Aug 08 20:53:02 2018
+RELEASE     720
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      nixxi.cpp
+LINE        3255
+DETAIL      NiPConnect2: 10.86.95.121:3300
+SYSTEM CALL connect
+ERRNO       10060
+ERRNO TEXT  WSAETIMEDOUT: Connection timed out
+COUNTER     2
+
+    Return code: RFC_FAILURE(1)
+    error group: 102
+    key: RFC_ERROR_COMMUNICATION
+
+Error:  >Wed Aug 08 20:53:23,941<    RfcException: [null]
+    message: Connect to SAP gateway failed
+Connection parameters: TYPE=A DEST=MES ASHOST=10.86.95.121 SYSNR=00 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.86.95.121:3300' not reached
+TIME        Wed Aug 08 20:53:23 2018
+RELEASE     720
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      nixxi.cpp
+LINE        3255
+DETAIL      NiPConnect2: 10.86.95.121:3300
+SYSTEM CALL connect
+ERRNO       10060
+ERRNO TEXT  WSAETIMEDOUT: Connection timed out
+COUNTER     2
+
+    Return code: RFC_FAILURE(1)
+    error group: 102
+    key: RFC_ERROR_COMMUNICATION
+
+Error:  >Wed Aug 08 20:53:44,956<    RfcException: [null]
+    message: Connect to SAP gateway failed
+Connection parameters: TYPE=A DEST=MES ASHOST=10.86.95.121 SYSNR=00 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.86.95.121:3300' not reached
+TIME        Wed Aug 08 20:53:44 2018
+RELEASE     720
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      nixxi.cpp
+LINE        3255
+DETAIL      NiPConnect2: 10.86.95.121:3300
+SYSTEM CALL connect
+ERRNO       10060
+ERRNO TEXT  WSAETIMEDOUT: Connection timed out
+COUNTER     2
+
+    Return code: RFC_FAILURE(1)
+    error group: 102
+    key: RFC_ERROR_COMMUNICATION
+
+
+**** Error file opened at 20180809 105507 China Standard Time Rel 3.0.7 (2011-04-20) [720.38]
+Error:  >Thu Aug 09 10:55:07,710<    RfcException: [null]
+    message: Connect to SAP gateway failed
+Connection parameters: TYPE=A DEST=MES ASHOST=10.86.95.121 SYSNR=00 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.86.95.121:3300' not reached
+TIME        Thu Aug 09 10:55:07 2018
+RELEASE     720
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      nixxi.cpp
+LINE        3255
+DETAIL      NiPConnect2: 10.86.95.121:3300
+SYSTEM CALL connect
+ERRNO       10053
+ERRNO TEXT  WSAECONNABORTED: Software caused connection abort
+COUNTER     2
+
+    Return code: RFC_FAILURE(1)
+    error group: 102
+    key: RFC_ERROR_COMMUNICATION
+
+
+**** Error file opened at 20180809 134210 China Standard Time Rel 3.0.7 (2011-04-20) [720.38]
+Error:  >Thu Aug 09 13:42:10,458<    RfcException: [null]
+    message: Connect to SAP gateway failed
+Connection parameters: TYPE=A DEST=MES ASHOST=10.86.95.121 SYSNR=00 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.86.95.121:3300' not reached
+TIME        Thu Aug 09 13:42:10 2018
+RELEASE     720
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      nixxi.cpp
+LINE        3255
+DETAIL      NiPConnect2: 10.86.95.121:3300
+SYSTEM CALL connect
+ERRNO       10053
+ERRNO TEXT  WSAECONNABORTED: Software caused connection abort
+COUNTER     2
+
+    Return code: RFC_FAILURE(1)
+    error group: 102
+    key: RFC_ERROR_COMMUNICATION
+
+
+**** Error file opened at 20180810 142347 China Standard Time Rel 3.0.7 (2011-04-20) [720.38]
+Error:  >Fri Aug 10 14:23:47,363<    >RfcGetException rc (7) message: ##.#####,####
+<RfcGetException
+
+
+**** Error file opened at 20180810 142541 China Standard Time Rel 3.0.7 (2011-04-20) [720.38]
+Error:  >Fri Aug 10 14:25:41,366<    >RfcGetException rc (7) message: ##.#####,####
+<RfcGetException
+
+
+**** Error file opened at 20180810 152905 China Standard Time Rel 3.0.7 (2011-04-20) [720.38]
+Error:  >Fri Aug 10 15:29:05,253<    RfcException: [null]
+    message: Connect to SAP gateway failed
+Connection parameters: TYPE=A DEST=MES ASHOST=10.86.95.121 SYSNR=00 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.86.95.121:3300' not reached
+TIME        Fri Aug 10 15:29:05 2018
+RELEASE     720
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      nixxi.cpp
+LINE        3255
+DETAIL      NiPConnect2: 10.86.95.121:3300
+SYSTEM CALL connect
+ERRNO       10053
+ERRNO TEXT  WSAECONNABORTED: Software caused connection abort
+COUNTER     2
+
+    Return code: RFC_FAILURE(1)
+    error group: 102
+    key: RFC_ERROR_COMMUNICATION
+
+
+**** Error file opened at 20180813 085735 China Standard Time Rel 3.0.7 (2011-04-20) [720.38]
+Error:  >Mon Aug 13 08:57:35,288<    RfcException: [null]
+    message: Connect to SAP gateway failed
+Connection parameters: TYPE=A DEST=MES ASHOST=10.86.95.121 SYSNR=00 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.86.95.121:3300' not reached
+TIME        Mon Aug 13 08:57:35 2018
+RELEASE     720
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      nixxi.cpp
+LINE        3255
+DETAIL      NiPConnect2: 10.86.95.121:3300
+SYSTEM CALL connect
+ERRNO       10060
+ERRNO TEXT  WSAETIMEDOUT: Connection timed out
+COUNTER     2
+
+    Return code: RFC_FAILURE(1)
+    error group: 102
+    key: RFC_ERROR_COMMUNICATION
+
+
+**** Error file opened at 20180813 173845 China Standard Time Rel 3.0.7 (2011-04-20) [720.38]
+Error:  >Mon Aug 13 17:38:45,496<    >RfcGetException rc (7) message: Invalid value in SIGN field of value table for IN itab operator. operator.
+<RfcGetException
+
+
+**** Error file opened at 20180813 174050 China Standard Time Rel 3.0.7 (2011-04-20) [720.38]
+Error:  >Mon Aug 13 17:40:50,945<    >RfcGetException rc (7) message: Invalid value in SIGN field of value table for IN itab operator. operator.
+<RfcGetException
+
+
+**** Error file opened at 20180813 212649 China Standard Time Rel 3.0.7 (2011-04-20) [720.38]
+Error:  >Mon Aug 13 21:26:49,128<    RfcException: [null]
+    message: Connect to SAP gateway failed
+Connection parameters: TYPE=A DEST=MES ASHOST=10.86.95.121 SYSNR=00 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.86.95.121:3300' not reached
+TIME        Mon Aug 13 21:26:49 2018
+RELEASE     720
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      nixxi.cpp
+LINE        3255
+DETAIL      NiPConnect2: 10.86.95.121:3300
+SYSTEM CALL connect
+ERRNO       10060
+ERRNO TEXT  WSAETIMEDOUT: Connection timed out
+COUNTER     2
+
+    Return code: RFC_FAILURE(1)
+    error group: 102
+    key: RFC_ERROR_COMMUNICATION
+
+
+**** Error file opened at 20180813 220538 China Standard Time Rel 3.0.7 (2011-04-20) [720.38]
+Error:  >Mon Aug 13 22:05:38,174<    RfcException: [null]
+    message: Connect to SAP gateway failed
+Connection parameters: TYPE=A DEST=MES ASHOST=10.86.95.121 SYSNR=00 PCS=1
+
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       partner '10.86.95.121:3300' not reached
+TIME        Mon Aug 13 22:05:38 2018
+RELEASE     720
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -10
+MODULE      nixxi.cpp
+LINE        3255
+DETAIL      NiPConnect2: 10.86.95.121:3300
+SYSTEM CALL connect
+ERRNO       10053
+ERRNO TEXT  WSAECONNABORTED: Software caused connection abort
+COUNTER     2
+
+    Return code: RFC_FAILURE(1)
+    error group: 102
+    key: RFC_ERROR_COMMUNICATION
+
