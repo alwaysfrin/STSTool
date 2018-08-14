@@ -1,0 +1,4 @@
+1，本程序只能运行在32位jre下
+2，正常以微服jar包运行，端口及项目配置在resources下的application.properties中修改
+3，运行jar包，参考运行程序说明
+4，需要确认JCustomOpc.dll和jar在同级目录，或者拷贝至classpath

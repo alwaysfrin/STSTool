@@ -32,7 +32,7 @@ public class SAPJCoDemo {
 
     public static void main(String[] args) {
     	//测试直接连接
-    	//testConnect();
+    	testConnect();
     	//测试网络服务
     	//testWebServer();
     	//测试方法URL请求调用
@@ -178,7 +178,6 @@ public class SAPJCoDemo {
             paramMap.put("client", "220");
             paramMap.put("user", "ESBRFC");
             paramMap.put("passwd", "init1234");
-            paramMap.put("lang", "ZH");
             
             paramMap.put("functionName", "ZMM_04_MAT_MES2");
             //普通入参
