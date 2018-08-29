@@ -1,0 +1,7 @@
+﻿1，双击bat运行程序
+2，程序默认访问：http://localhost:8890/mvs
+
+注
+1）可以将运行文件发送到桌面快捷方式
+2）注意打开防火墙对应的端口
+3）若需要修改端口和程序别名，修改resources下的application.properties
