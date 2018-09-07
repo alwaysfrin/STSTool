@@ -29,10 +29,10 @@ import com.jco.tool.SAPUrlTool;
  */
 public class SAPJCoDemo {
     public static final Logger LOGGER = LoggerFactory.getLogger(SAPJCoDemo.class);
-
+    private static final String IP_CONFIG = ""; //"10.86.95.121";    //测试时请打开，不要提交即可，这部分sonar校验会不通过
     public static void main(String[] args) {
     	//测试直接连接
-    	testConnect();
+    	//testConnect();
     	//测试网络服务
     	//testWebServer();
     	//测试方法URL请求调用
@@ -47,7 +47,7 @@ public class SAPJCoDemo {
         try {
             JCoParam jcoParam = new JCoParam();
             //jcoParam.setJcoClientUrl("http://localhost:8889/jco");	//jco工具的路径
-            jcoParam.setAshost("10.86.95.121");
+            jcoParam.setAshost(IP_CONFIG);
             jcoParam.setSysnr("00");
             jcoParam.setClient("220");
             jcoParam.setUser("ESBRFC");
@@ -132,7 +132,7 @@ public class SAPJCoDemo {
             LOGGER.info("连接SAP执行结束……");
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
-            e.printStackTrace();
+            // e.printStackTrace();
         }
 	}
 	
@@ -173,11 +173,12 @@ public class SAPJCoDemo {
             LOGGER.info("已连接:" + url);
 
             Map<String, String> paramMap = new HashMap<String, String>();
-            paramMap.put("ashost","10.86.95.121");
+            paramMap.put("ashost",IP_CONFIG);
             paramMap.put("sysnr", "00");
             paramMap.put("client", "220");
             paramMap.put("user", "ESBRFC");
             paramMap.put("passwd", "init1234");
+            paramMap.put("lang", "ZH");
             
             paramMap.put("functionName", "ZMM_04_MAT_MES2");
             //普通入参
@@ -215,7 +216,7 @@ public class SAPJCoDemo {
     public static void testSAPTool() {
     	JCoParam jcoParam = new JCoParam();
         jcoParam.setJcoClientUrl("http://localhost:8889/jco");	//jco工具的路径
-        jcoParam.setAshost("10.86.95.121");
+        jcoParam.setAshost(IP_CONFIG);
         jcoParam.setSysnr("00");
         jcoParam.setClient("220");
         jcoParam.setUser("ESBRFC");

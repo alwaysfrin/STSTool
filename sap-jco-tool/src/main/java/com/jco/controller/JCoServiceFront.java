@@ -60,7 +60,8 @@ public class JCoServiceFront {
 			model.addAttribute("result", "共耗时：" + (System.currentTimeMillis() - startTime) + "，" + sb.toString());
         }catch(Exception e) {
 			model.addAttribute("result", "无法连接SAP：" + e.getMessage());
-			e.printStackTrace();
+			LOGGER.error(e.getMessage());
+			// e.printStackTrace();
         }
         
         model.addAttribute("javalib", "java lib : "+System.getProperty("java.library.path"));

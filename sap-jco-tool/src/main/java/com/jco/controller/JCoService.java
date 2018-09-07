@@ -105,7 +105,8 @@ public class JCoService {
             LOGGER.info("共耗时：" + (System.currentTimeMillis() - startTime) + "，返回：" + jcoParam.toString());
         }catch(Exception e) {
 			result = new JCoResultBean(false,"执行sap方法出错：" + e.getMessage());
-			e.printStackTrace();
+			LOGGER.error(e.getMessage());
+			// e.printStackTrace();
         }
 		return result;
 	}

@@ -114,7 +114,7 @@ public class SAPUrlTool {
 	        }
 	        
 	        for(String ks : postMap.keySet()) {
-	        	System.out.println(ks + ":" + postMap.get(ks));
+	        	// System.out.println(ks + ":" + postMap.get(ks));
 	        }
 	        
 			return proxy.doPost(jcoParam.getJcoClientUrl() + EXECUTE_URL, postMap);
