@@ -141,7 +141,7 @@ public class SAPService {
         JCoFunction function = jCoDestination.getRepository().getFunction(jcoParam.getFunctionName());
         
         //普通入参
-        if(!StringUtils.isEmpty(jcoParam.getParameterInputName().trim())) {
+        if(!StringUtils.isEmpty(jcoParam.getParameterInputName())) {
         	// 传递rfc参数，放入对应的参数名和值
             JCoParameterList importParam = function.getImportParameterList();
             String[] paramInArr = jcoParam.getParameterInputName().split(",");

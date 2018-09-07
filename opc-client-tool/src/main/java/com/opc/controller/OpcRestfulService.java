@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -21,6 +23,7 @@ import io.swagger.annotations.Api;
 @Api(value="/",tags="远端restful请求")
 @RestController
 public class OpcRestfulService {
+    public static final Logger LOGGER = LoggerFactory.getLogger(OpcRestfulService.class);
 	
 	@Autowired
 	private OpcConnectTool opcConnectTool;
@@ -33,10 +36,10 @@ public class OpcRestfulService {
 			return new ResultBean(false,"请求数据不完整");
 		}else {
 			long startTime = System.currentTimeMillis();
-			String value = opcConnectTool.queryOpcServer(server);
+			ResultBean result = opcConnectTool.queryOpcServer(server);
 			
-			System.out.println("共耗时：" + (System.currentTimeMillis() - startTime)+ "，获取值：" + value);
-			return new ResultBean(true,"共耗时：" + (System.currentTimeMillis() - startTime)+ "，获取值：" + value,value);
+			LOGGER.info("共耗时：" + (System.currentTimeMillis() - startTime)+ "，获取：" + result);
+			return result;
 		}
 	}
 	

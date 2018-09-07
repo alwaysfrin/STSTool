@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mvs.camera.pojo.MvsCamera;
@@ -32,13 +33,14 @@ public class ImageController {
 	public String index() {
 		return "/index";
 	}
-	
+
+	@ResponseBody
 	@RequestMapping(value="/take-picture")
-	public void takePicture(HttpServletResponse response,String clientUrl,int imageType,int imageSize) throws IOException {
+	public ResultBean takePicture(HttpServletResponse response,String clientUrl,int imageType,int imageSize) throws IOException {
 		ResultBean result = new CameraTool(new MvsCamera(clientUrl,imageType,imageSize)).getImage();
-		LOGGER.info(result.toString());
+		LOGGER.info("返回结果：" + result.toString());
 		
-		response.getWriter().print(result);
+		return result;
 	}
 	
 	/**

@@ -10,6 +10,8 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.opc.pojo.OpcModel;
+import com.opc.pojo.ResultBean;
 import com.opc.service.OpcConnectTool;
 
 import javafish.clients.opc.JCustomOpc;
@@ -34,6 +37,7 @@ import javafish.clients.opc.variant.Variant;
 
 @Controller
 public class OpcService {
+	public static final Logger LOGGER = LoggerFactory.getLogger(OpcService.class);
 	
 	@Autowired
 	private OpcConnectTool opcConnectTool;
@@ -66,13 +70,13 @@ public class OpcService {
 
         try {
             jopc.connect();
-            System.out.println("JOPC client is connected...");
+            LOGGER.info("JOPC client is connected...");
 
             jopc.registerGroups();
-            System.out.println("OPCGroup are registered...");
+            LOGGER.info("OPCGroup are registered...");
 
-            //jopc.registerItem(group,item1);
-            //jopc.registerItem(group,item2);
+            jopc.registerItem(group,item1);
+            jopc.registerItem(group,item2);
 
             /*synchronized(test) {
                 test.wait(50);
@@ -93,17 +97,17 @@ public class OpcService {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Calendar cal = responseItem.getTimeStamp();
                 Date date = cal.getTime();
-                System.out.println("1 ==>"+ responseItem.getItemName() + " : " + responseItem.getValue()
+                LOGGER.info("1 ==>"+ responseItem.getItemName() + " : " + responseItem.getValue()
                         + " : " + responseItem.getAccessPath() + " : " + responseItem.getDataType() + " : " + Variant.getVariantName(responseItem.getDataType()) + " : "
                         + sdf.format(date));
 
                 /*OpcItem responseItem2 = jopc.synchReadItem(group, item2);
                 cal = responseItem.getTimeStamp();
                 date = cal.getTime();
-                System.out.println("2 ==>"+ responseItem2.getItemName() + " : " + responseItem2.getValue()
+                LOGGER.info("2 ==>"+ responseItem2.getItemName() + " : " + responseItem2.getValue()
                         + " : " + responseItem2.getAccessPath() + " : " + responseItem2.getDataType() + " : " + Variant.getVariantName(responseItem2.getDataType())
                         + sdf.format(date));*/
-                //System.out.println(Variant.getVariantName(responseItem.getDataType()) + ": " + responseItem.getValue());
+                //LOGGER.info(Variant.getVariantName(responseItem.getDataType()) + ": " + responseItem.getValue());
 
                 //写数据
                 //item1.setValue(new Variant(0));
@@ -145,10 +149,10 @@ public class OpcService {
 		long startTime = System.currentTimeMillis();
 		model.addAttribute("javalib", "java lib : "+System.getProperty("java.library.path"));
 
-		String value = opcConnectTool.queryOpcServer(server);
-		model.addAttribute("result",value);
+		ResultBean result = opcConnectTool.queryOpcServer(server);
+		model.addAttribute("result","【"+result.isSuccess()+"】，结果：" + result.getResult());
 		
-		System.out.println("共耗时：" + (System.currentTimeMillis() - startTime));
+		LOGGER.info("共耗时：" + (System.currentTimeMillis() - startTime));
 		return "index";
 	}
 	
@@ -156,8 +160,8 @@ public class OpcService {
 	public String editparam(OpcModel server, String editValue, Model model) {
 		model.addAttribute("javalib", "java lib : "+System.getProperty("java.library.path"));
 		
-		opcConnectTool.editOpcParam(server, editValue);
-		model.addAttribute("result","修改成功");
+		ResultBean result = opcConnectTool.editOpcParam(server, editValue);
+		model.addAttribute("result","【"+result.isSuccess()+"】，结果：" + result.getResult());
 		
 		return "index";
 	}

@@ -1,8 +1,11 @@
 package com.opc.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.opc.pojo.ResultBean;
+import com.opc.controller.OpcService;
 import com.opc.pojo.OpcModel;
 
 import javafish.clients.opc.JOpc;
@@ -12,13 +15,15 @@ import javafish.clients.opc.variant.Variant;
 
 @Service
 public class OpcConnectTool {
-
+	public static final Logger LOGGER = LoggerFactory.getLogger(OpcConnectTool.class);
+	
 	/**
 	 * 查询opcserver数据
 	 * @param server
 	 * @param model
 	 */
-	public String queryOpcServer(OpcModel server) {
+	public ResultBean queryOpcServer(OpcModel server) {
+		ResultBean resultBean = new ResultBean(false,"");
 		String paramValue = null;
 		JOpc.coInitialize();
 		try {
@@ -40,13 +45,17 @@ public class OpcConnectTool {
 	        queryGroup.addItem(queryItem);
 	        jopc.addGroup(queryGroup);
 	        jopc.connect();
-	        //System.out.println("JOPC client is connected...");
+	        LOGGER.info("JOPC client is connected...");
 	
 	        jopc.registerGroups();
-	        //System.out.println("OPCGroup are registered...");
+	        jopc.registerItem(queryGroup, queryItem);
+	        LOGGER.info("OPCGroup are registered...");
 	        
 	        //此处需要延迟，不然可能获取的数据不准确
-	        Thread.sleep(50);
+	        //Thread.sleep(50);
+	        synchronized(this) {
+	            this.wait(50);
+	        }
 	        OpcItem responseItem = jopc.synchReadItem(queryGroup, queryItem);
 	        paramValue = responseItem.getValue().toString();
 	        
@@ -59,12 +68,26 @@ public class OpcConnectTool {
 						            + " : " + responseItem.getDataType() 
 						            + " : " + Variant.getVariantName(responseItem.getDataType()) 
 						            + " : " + sdf.format(date));*/
+	        if(responseItem.isQuality()) {
+	        	//准确获取数据
+	        	resultBean.setSuccess(true);
+	        	resultBean.setResult(paramValue);
+	        	resultBean.setMsg("获取数据成功。");
+	        }else {
+	        	//无法准确获取数据
+	        	resultBean.setSuccess(false);
+	        	resultBean.setResult("");
+	        	resultBean.setMsg("无法获取数据。");
+	        }
 		}catch(Exception e) {
-			e.printStackTrace();
+			LOGGER.error(e.getMessage(),e);
+        	resultBean.setSuccess(false);
+        	resultBean.setResult("");
+        	resultBean.setMsg(e.getMessage());
 		}finally {
 	        JOpc.coUninitialize();
 		}
-		return paramValue;
+		return resultBean;
 	}
 
 	/**
@@ -95,10 +118,11 @@ public class OpcConnectTool {
 	        editGroup.addItem(editItem);
 	        jopc.addGroup(editGroup);
 	        jopc.connect();
-	        //System.out.println("JOPC client is connected...");
+	        LOGGER.info("JOPC client is connected...");
 	
 	        jopc.registerGroups();
-	        //System.out.println("OPCGroup are registered...");
+	        jopc.registerItem(editGroup, editItem);
+	        LOGGER.info("OPCGroup are registered...");
 	        
 	        OpcItem responseItem = jopc.synchReadItem(editGroup, editItem);
 	        responseItem.setValue(new Variant(editValue));
@@ -107,9 +131,9 @@ public class OpcConnectTool {
             result.setSuccess(true);
             result.setMsg("信息修改成功。");
 		}catch(Exception e) {
-			e.printStackTrace();
-            result.setSuccess(true);
-            result.setMsg("信息无法修改：" + e.getMessage());
+			LOGGER.error(e.getMessage(),e);
+            result.setSuccess(false);
+            result.setMsg("修改失败：" + e.getMessage());
 		}finally {
 	        JOpc.coUninitialize();
 		}

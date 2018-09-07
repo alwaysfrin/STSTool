@@ -113,10 +113,6 @@ public class SAPUrlTool {
 		        postMap.put("tableOutCellNames", returnCell.toString());
 	        }
 	        
-	        for(String ks : postMap.keySet()) {
-	        	// System.out.println(ks + ":" + postMap.get(ks));
-	        }
-	        
 			return proxy.doPost(jcoParam.getJcoClientUrl() + EXECUTE_URL, postMap);
 		}else {
 			resultBean = new JCoResultBean(false,"网络【"+jcoParam.getJcoClientUrl()+"】无法连接。");

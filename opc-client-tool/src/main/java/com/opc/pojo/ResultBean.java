@@ -50,4 +50,8 @@ public class ResultBean {
 		this.result = result;
 	}
 
+	@Override
+	public String toString() {
+		return "ResultBean [success=" + success + ", msg=" + msg + ", result=" + result + "]";
+	}
 }
