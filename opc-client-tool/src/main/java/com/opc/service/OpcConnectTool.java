@@ -41,7 +41,7 @@ public class OpcConnectTool {
 	         * param3 : 查询频率（异步使用）
 	         * param4 : 不工作占比
 	         */
-	        OpcGroup queryGroup = new OpcGroup("opcquerygroup", true, 1000, 0.0f);
+	        OpcGroup queryGroup = new OpcGroup("opcquerygroup", true, OpcModel.UPDATE_RATE, 0.0f);
 	        queryGroup.addItem(queryItem);
 	        jopc.addGroup(queryGroup);
 	        jopc.connect();
@@ -114,7 +114,7 @@ public class OpcConnectTool {
 	         * param3 : 查询频率（异步使用）
 	         * param4 : 不工作占比
 	         */
-	        OpcGroup editGroup = new OpcGroup("opcquerygroup", true, 1000, 0.0f);
+	        OpcGroup editGroup = new OpcGroup("opcquerygroup", true, OpcModel.UPDATE_RATE, 0.0f);
 	        editGroup.addItem(editItem);
 	        jopc.addGroup(editGroup);
 	        jopc.connect();

@@ -3,6 +3,8 @@ package com.opc.pojo;
 import io.swagger.annotations.ApiParam;
 
 public class OpcModel {
+	
+	public static int UPDATE_RATE = 100;	//查询频率
 
 	@ApiParam("opcserver地址-ip")
 	private String host;	//通常为localhost

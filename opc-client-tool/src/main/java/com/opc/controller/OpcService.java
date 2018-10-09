@@ -62,7 +62,7 @@ public class OpcService {
          * param3 : 查询频率（异步使用）
          * param4 : 不工作占比
          */
-        OpcGroup group = new OpcGroup("group1", true, 500, 0.0f);
+        OpcGroup group = new OpcGroup("group1", true, OpcModel.UPDATE_RATE, 0.0f);
         group.addItem(item1);
         group.addItem(item2);
 
