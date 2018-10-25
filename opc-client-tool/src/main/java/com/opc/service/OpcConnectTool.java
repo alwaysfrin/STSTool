@@ -1,5 +1,7 @@
 package com.opc.service;
 
+import java.util.HashMap;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,9 @@ import com.opc.pojo.OpcModel;
 import javafish.clients.opc.JOpc;
 import javafish.clients.opc.component.OpcGroup;
 import javafish.clients.opc.component.OpcItem;
+import javafish.clients.opc.exception.UnableAddGroupException;
+import javafish.clients.opc.exception.UnableAddItemException;
+import javafish.clients.opc.lang.Translate;
 import javafish.clients.opc.variant.Variant;
 
 @Service
@@ -45,11 +50,17 @@ public class OpcConnectTool {
 	        queryGroup.addItem(queryItem);
 	        jopc.addGroup(queryGroup);
 	        jopc.connect();
-	        LOGGER.info("JOPC client is connected...");
-	
-	        jopc.registerGroups();
-	        jopc.registerItem(queryGroup, queryItem);
-	        LOGGER.info("OPCGroup are registered...");
+	        LOGGER.info("JOPC client 连接成功...");
+	        
+	        try {
+		        jopc.registerGroups();
+		        jopc.registerItem(queryGroup, queryItem);
+		        LOGGER.info("OPCGroup【{}】注册成功...",server.getItemName());
+	        }catch (UnableAddGroupException e) {
+		        LOGGER.error("opc group注册失败，继续尝试调用 ...");
+	        }catch (UnableAddItemException e) {
+		        LOGGER.error("opc item【{}】注册失败，继续尝试调用 ...",server.getItemName());
+	        }
 	        
 	        //此处需要延迟，不然可能获取的数据不准确
 	        //Thread.sleep(50);
@@ -118,18 +129,24 @@ public class OpcConnectTool {
 	        editGroup.addItem(editItem);
 	        jopc.addGroup(editGroup);
 	        jopc.connect();
-	        LOGGER.info("JOPC client is connected...");
+	        LOGGER.info("JOPC client 连接成功...");
 	
-	        jopc.registerGroups();
-	        jopc.registerItem(editGroup, editItem);
-	        LOGGER.info("OPCGroup are registered...");
+	        try {
+		        jopc.registerGroups();
+		        jopc.registerItem(editGroup, editItem);
+		        LOGGER.info("OPCGroup【{}】注册成功...",server.getItemName());
+	        }catch (UnableAddGroupException e) {
+		        LOGGER.error("opc group注册失败，继续尝试调用 ...");
+	        }catch (UnableAddItemException e) {
+		        LOGGER.error("opc item【{}】注册失败，继续尝试调用 ...",server.getItemName());
+	        }
 	        
 	        OpcItem responseItem = jopc.synchReadItem(editGroup, editItem);
 	        responseItem.setValue(new Variant(editValue));
             jopc.synchWriteItem(editGroup,responseItem);
             
             result.setSuccess(true);
-            result.setMsg("信息修改成功。");
+            result.setMsg("【"+server.getItemName()+"】信息修改成功。");
 		}catch(Exception e) {
 			LOGGER.error(e.getMessage(),e);
             result.setSuccess(false);
