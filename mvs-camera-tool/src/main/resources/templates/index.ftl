@@ -13,7 +13,7 @@
 		<h2>拍照保存照片</h2>
 		<form action="take-picture" method="GET">
 			clientUrl地址：<input type="text" name="clientUrl" value="http://localhost/getimage">&nbsp;&nbsp;
-			imageType（图片类型，1 jpg，2 bmp）：<input type="text" name="1" value="1"><br/>
+			imageType（图片类型，1 jpg，2 bmp）：<input type="text" name="imageType" value="1"><br/>
 			imageSize（图片压缩程度，1 不压缩，5 最大压缩）：<input type="text" name="imageSize" value="1"><br/>
 			<input type="submit" value="立即拍照"/>
 		</form>
