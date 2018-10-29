@@ -5,8 +5,7 @@ import com.mvs.camera.pojo.ResultBean;
 import net.coobird.thumbnailator.Thumbnails;
 
 import org.apache.commons.logging.Log;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.util.StringUtils;
 
 import java.io.*;
@@ -21,7 +20,7 @@ import java.util.Map.Entry;
  */
 public class HttpRequestProxy {
 
-    public static final Logger LOGGER = LoggerFactory.getLogger(HttpRequestProxy.class);
+    public static final Logger LOGGER = Logger.getLogger(HttpRequestProxy.class);
 
     /**
      * 连接超时

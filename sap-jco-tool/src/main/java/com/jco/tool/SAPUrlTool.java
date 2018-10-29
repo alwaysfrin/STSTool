@@ -3,8 +3,7 @@ package com.jco.tool;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -21,7 +20,7 @@ import com.sap.conn.jco.JCoTable;
  *
  */
 public class SAPUrlTool {
-    public static final Logger LOGGER = LoggerFactory.getLogger(SAPUrlTool.class);
+    public static final Logger LOGGER = Logger.getLogger(SAPUrlTool.class);
     
     //请求路径
 	public static final String EXECUTE_URL = "/execute";

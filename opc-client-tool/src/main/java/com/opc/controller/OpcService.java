@@ -10,8 +10,7 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
@@ -37,7 +36,7 @@ import javafish.clients.opc.variant.Variant;
 
 @Controller
 public class OpcService {
-	public static final Logger LOGGER = LoggerFactory.getLogger(OpcService.class);
+	public static final Logger LOGGER = Logger.getLogger(OpcService.class);
 	
 	@Autowired
 	private OpcConnectTool opcConnectTool;

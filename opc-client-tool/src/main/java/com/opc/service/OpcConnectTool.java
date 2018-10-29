@@ -2,8 +2,7 @@ package com.opc.service;
 
 import java.util.HashMap;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.opc.pojo.ResultBean;
@@ -20,7 +19,7 @@ import javafish.clients.opc.variant.Variant;
 
 @Service
 public class OpcConnectTool {
-	public static final Logger LOGGER = LoggerFactory.getLogger(OpcConnectTool.class);
+	public static final Logger LOGGER = Logger.getLogger(OpcConnectTool.class);
 	
 	/**
 	 * 查询opcserver数据
@@ -55,11 +54,11 @@ public class OpcConnectTool {
 	        try {
 		        jopc.registerGroups();
 		        jopc.registerItem(queryGroup, queryItem);
-		        LOGGER.info("OPCGroup【{}】注册成功...",server.getItemName());
+		        LOGGER.info("OPCGroup【"+server.getItemName()+"】注册成功...");
 	        }catch (UnableAddGroupException e) {
 		        LOGGER.error("opc group注册失败，继续尝试调用 ...");
 	        }catch (UnableAddItemException e) {
-		        LOGGER.error("opc item【{}】注册失败，继续尝试调用 ...",server.getItemName());
+		        LOGGER.error("opc item【"+server.getItemName()+"】注册失败，继续尝试调用 ...");
 	        }
 	        
 	        //此处需要延迟，不然可能获取的数据不准确
@@ -134,11 +133,11 @@ public class OpcConnectTool {
 	        try {
 		        jopc.registerGroups();
 		        jopc.registerItem(editGroup, editItem);
-		        LOGGER.info("OPCGroup【{}】注册成功...",server.getItemName());
+		        LOGGER.info("OPCGroup【"+server.getItemName()+"】注册成功...");
 	        }catch (UnableAddGroupException e) {
 		        LOGGER.error("opc group注册失败，继续尝试调用 ...");
 	        }catch (UnableAddItemException e) {
-		        LOGGER.error("opc item【{}】注册失败，继续尝试调用 ...",server.getItemName());
+		        LOGGER.error("opc item【"+server.getItemName()+"】注册失败，继续尝试调用 ...");
 	        }
 	        
 	        OpcItem responseItem = jopc.synchReadItem(editGroup, editItem);

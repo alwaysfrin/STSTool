@@ -3,8 +3,7 @@ package com.jco.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +18,7 @@ import com.sap.conn.jco.JCoFunctionTemplate;
 
 @Controller
 public class JCoServiceFront {
-    public static final Logger LOGGER = LoggerFactory.getLogger(JCoServiceFront.class);
+    public static final Logger LOGGER = Logger.getLogger(JCoServiceFront.class);
 
 	@Autowired
 	private SAPService sapService;

@@ -4,8 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -23,7 +22,7 @@ import io.swagger.annotations.Api;
 @Api(value="/",tags="远端restful请求")
 @RestController
 public class OpcRestfulService {
-    public static final Logger LOGGER = LoggerFactory.getLogger(OpcRestfulService.class);
+    public static final Logger LOGGER = Logger.getLogger(OpcRestfulService.class);
 	
 	@Autowired
 	private OpcConnectTool opcConnectTool;

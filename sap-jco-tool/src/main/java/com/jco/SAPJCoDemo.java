@@ -6,8 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -28,7 +27,7 @@ import com.jco.tool.SAPUrlTool;
  *
  */
 public class SAPJCoDemo {
-    public static final Logger LOGGER = LoggerFactory.getLogger(SAPJCoDemo.class);
+    public static final Logger LOGGER = Logger.getLogger(SAPJCoDemo.class);
     private static final String IP_CONFIG = ""; //"10.86.95.121";    //测试时请打开，不要提交即可，这部分sonar校验会不通过
     public static void main(String[] args) {
     	//测试直接连接

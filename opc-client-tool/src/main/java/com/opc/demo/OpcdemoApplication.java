@@ -3,8 +3,7 @@ package com.opc.demo;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
@@ -25,7 +24,7 @@ import javafish.clients.opc.JOpc;
 @SpringBootApplication
 @ComponentScan(value = { "com.opc" })
 public class OpcdemoApplication {
-	public static final Logger LOGGER = LoggerFactory.getLogger(OpcdemoApplication.class);
+	public static final Logger LOGGER = Logger.getLogger(OpcdemoApplication.class);
 
 	public static void main(String[] args) {
 		// SpringApplication.run(OpcdemoApplication.class, args);
@@ -46,5 +45,6 @@ public class OpcdemoApplication {
 		});
 
 		springApplication.run(args);
+		LOGGER.info("【opc工具成功启动...】");
 	}
 }

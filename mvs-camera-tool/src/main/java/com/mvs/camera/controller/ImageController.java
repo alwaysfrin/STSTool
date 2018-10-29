@@ -7,9 +7,7 @@ import java.io.OutputStream;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +25,7 @@ import io.swagger.annotations.ApiParam;
 @Controller
 public class ImageController {
 
-	public static final Logger LOGGER = LoggerFactory.getLogger(ImageController.class);
+	public static final Logger LOGGER = Logger.getLogger(ImageController.class);
 	
 	@GetMapping(value="/index")
 	public String index() {

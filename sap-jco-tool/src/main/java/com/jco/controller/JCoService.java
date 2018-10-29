@@ -5,8 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -29,7 +28,7 @@ import io.swagger.annotations.Api;
 @Api(value="/", tags="jco请求")
 @RestController
 public class JCoService {
-    public static final Logger LOGGER = LoggerFactory.getLogger(JCoService.class);
+    public static final Logger LOGGER = Logger.getLogger(JCoService.class);
 
 	@Autowired
 	private SAPService sapService;

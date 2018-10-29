@@ -8,8 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -35,7 +34,7 @@ import com.sap.conn.jco.ext.DestinationDataProvider;
 @Service
 public class SAPService {
 
-    public static final Logger LOGGER = LoggerFactory.getLogger(SAPService.class);
+    public static final Logger LOGGER = Logger.getLogger(SAPService.class);
     private static final String PROP_NAME = "MES";
     private static final String LANG = "ZH";	//登录语言
     private static final String POOL_CAPACITY = "5"; //最大连接数

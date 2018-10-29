@@ -9,8 +9,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 import org.springframework.util.StringUtils;
 
 import com.mvs.camera.pojo.MvsCamera;
@@ -22,7 +21,7 @@ import net.coobird.thumbnailator.Thumbnails;
 
 public class TestImage {
 
-    public static final Logger LOGGER = LoggerFactory.getLogger(TestImage.class);
+    public static final Logger LOGGER = Logger.getLogger(TestImage.class);
 
 	public static void main(String[] args) {
 		//请求拍照
