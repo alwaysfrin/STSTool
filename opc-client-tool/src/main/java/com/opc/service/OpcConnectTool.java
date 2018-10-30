@@ -49,24 +49,24 @@ public class OpcConnectTool {
 	        queryGroup.addItem(queryItem);
 	        jopc.addGroup(queryGroup);
 	        jopc.connect();
-	        LOGGER.info("JOPC client 连接成功...");
+	        LOGGER.info("【OPC查询】JOPC client 连接成功...");
 	        
 	        try {
 		        jopc.registerGroups();
 		        jopc.registerItem(queryGroup, queryItem);
-		        LOGGER.info("OPCGroup【"+server.getItemName()+"】注册成功...");
+		        LOGGER.info("【"+server.getItemName()+"】注册成功...");
 	        }catch (UnableAddGroupException e) {
-		        LOGGER.error("opc group注册失败，继续尝试调用 ...");
+		        LOGGER.error("group注册失败，继续尝试调用 ...");
 	        }catch (UnableAddItemException e) {
-		        LOGGER.error("opc item【"+server.getItemName()+"】注册失败，继续尝试调用 ...");
+		        LOGGER.error("【"+server.getItemName()+"】注册失败，继续尝试调用 ...");
 	        }
 	        
 	        //此处需要延迟，不然可能获取的数据不准确
-	        //Thread.sleep(50);
 	        synchronized(this) {
 	            this.wait(50);
 	        }
 	        OpcItem responseItem = jopc.synchReadItem(queryGroup, queryItem);
+	        LOGGER.info("【获取opc-Item数据】" + responseItem);
 	        paramValue = responseItem.getValue().toString();
 	        
 	        /*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -128,21 +128,27 @@ public class OpcConnectTool {
 	        editGroup.addItem(editItem);
 	        jopc.addGroup(editGroup);
 	        jopc.connect();
-	        LOGGER.info("JOPC client 连接成功...");
+	        LOGGER.info("【OPC修改】JOPC client 连接成功...");
 	
 	        try {
 		        jopc.registerGroups();
 		        jopc.registerItem(editGroup, editItem);
-		        LOGGER.info("OPCGroup【"+server.getItemName()+"】注册成功...");
+		        LOGGER.info("【"+server.getItemName()+"】注册成功...");
 	        }catch (UnableAddGroupException e) {
-		        LOGGER.error("opc group注册失败，继续尝试调用 ...");
+		        LOGGER.error("group注册失败，继续尝试调用 ...");
 	        }catch (UnableAddItemException e) {
-		        LOGGER.error("opc item【"+server.getItemName()+"】注册失败，继续尝试调用 ...");
+		        LOGGER.error("【"+server.getItemName()+"】注册失败，继续尝试调用 ...");
 	        }
-	        
+	
+	        synchronized(this) {
+	            this.wait(50);
+	        }
 	        OpcItem responseItem = jopc.synchReadItem(editGroup, editItem);
+	        LOGGER.info("【获取opc-Item数据】" + responseItem);
+	        
 	        responseItem.setValue(new Variant(editValue));
             jopc.synchWriteItem(editGroup,responseItem);
+	        LOGGER.info("【写入数据："+editValue+"】");
             
             result.setSuccess(true);
             result.setMsg("【"+server.getItemName()+"】信息修改成功。");
@@ -153,6 +159,7 @@ public class OpcConnectTool {
 		}finally {
 	        JOpc.coUninitialize();
 		}
+        LOGGER.info("【获取opc结果】" + result);
 		return result;
 	}
 }
