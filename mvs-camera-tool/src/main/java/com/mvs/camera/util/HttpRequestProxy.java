@@ -1,17 +1,29 @@
 package com.mvs.camera.util;
 
+import com.mvs.camera.pojo.MvsCamera;
 import com.mvs.camera.pojo.ResultBean;
 
 import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
 
 import org.apache.commons.logging.Log;
 import org.apache.log4j.Logger;
 import org.springframework.util.StringUtils;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.*;
 import java.util.*;
 import java.util.Map.Entry;
+
+import javax.imageio.ImageIO;
 
 /**
  * HTTP请求代理类
@@ -352,12 +364,18 @@ public class HttpRequestProxy {
     /******************************** 工具方法 开始 ***************************************/
 
     /**
+     * 
      * 发送不带参数的GET的HTTP请求
      *
      * @param reqUrl HTTP请求URL
+     * @param pressText	水印内容
+     * @param imageType	图片格式
+     * @param qualityType 是否压缩
+     * @param cto
+     * @param rto
      * @return HTTP响应的字符串
      */
-    public ResultBean doImageGet(String reqUrl,String imageType,int qualityType, int cto, int rto) {
+    public ResultBean doImageGet(String reqUrl, String pressText,String imageType,int qualityType, int cto, int rto) {
         HttpURLConnection urlCon = null;
         ResultBean result = null;
         try {
@@ -382,15 +400,15 @@ public class HttpRequestProxy {
             if(urlCon.getResponseCode() == 200) {
             	//如果响应为“200”，表示成功响应，则返回一个输入流
                 InputStream is = urlCon.getInputStream();
-                LOGGER.info("正常返回图片流大小：" + is.available());
+                //File ifile = new File("F:\\imgtest\\123.jpg");
+                //is = new FileInputStream(ifile);
+                LOGGER.info("（1）正常返回图片流大小：" + is.available());
                 
                 String imageName = System.currentTimeMillis() + "." + imageType;
-
                 // 将文件输出流与文件myavatar.jpg关联
                 // 这里是输出到工程根目录下
                 File file = new File(imageName);
                 FileOutputStream fos = new FileOutputStream(file);
-                LOGGER.info("图片保存绝对路径： " + file.getAbsolutePath());
 
                 // 将输入流循环写到关联文件的输出流
                 // 为了提高效率, 定义缓冲buffer来缓存输入流
@@ -403,7 +421,26 @@ public class HttpRequestProxy {
                 // 释放资源
                 is.close();
                 fos.close();
+                LOGGER.info("（2）生成图片大小：" + file.length() + "，保存绝对路径： " + file.getAbsolutePath());
                 
+                //添加文字水印
+                if(!StringUtils.isEmpty(pressText)) {
+                    //根据文字内容生成水印图片
+                	/*BufferedImage waterImg = createImage(pressText);
+        		    
+	                Thumbnails.of(file)
+		                //添加水印
+		                .watermark(Positions.BOTTOM_LEFT, waterImg, 0.7f)	//透明度
+		                .outputQuality(1f)   //输出质量
+		                .scale(1f)   //等比压缩
+		                .toFile(file);
+	                LOGGER.info("（3）水印生成图片大小：" + file.length());*/
+                	
+                	BufferedImage bm = addWaterMark(new FileInputStream(file), pressText, Color.WHITE);
+                	ImageIO.write(bm, imageType, file);// 输出图片
+                }
+                
+                //压缩
                 if(qualityType > 1) {
 	                float quality = 1f;
 	                switch(qualityType) {
@@ -424,17 +461,20 @@ public class HttpRequestProxy {
 		                	break;
 	                }
 	                
-	                LOGGER.info("【启用压缩】缩前大小：" + file.length());
+	                LOGGER.info("【（4）启用压缩】缩前大小：" + file.length());
 	                // 图片压缩处理
-	                Thumbnails.of(file).scale(1f).outputQuality(quality).toFile(file);
-	                LOGGER.info("【启用压缩】压缩后大小：" + file.length());
+	                Thumbnails.of(file)
+	                	.scale(1f)
+	                	.outputQuality(quality)
+	                	.toFile(file);
+	                LOGGER.info("【（4）启用压缩】压缩后大小：" + file.length());
                 }
                 
 	            result = new ResultBean(true, imageName);
             }else {
             	result = new ResultBean(false, "无法获取照片，请检查路径：" + reqUrl);
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
         	result = new ResultBean(false, "获取照片出错：" + e.getMessage());
             LOGGER.error("网络故障请求：" + e.getMessage() + "，reqUrl=" + reqUrl);
         } finally {
@@ -446,7 +486,84 @@ public class HttpRequestProxy {
         return result;
     }
 
-    public ResultBean doImageGet(String reqUrl,String imageType,int qualityType) {
-        return doImageGet(reqUrl, imageType,qualityType,connectTimeOut, transferTimeOut);
+    public ResultBean doImageGet(String reqUrl,String pressText,String imageType,int qualityType) {
+        return doImageGet(reqUrl, pressText,imageType,qualityType,connectTimeOut, transferTimeOut);
     }
+    
+    /**
+     * 根据str,font的样式以及输出文件目录  
+     * @param str 做成图片的字符
+     * @param font	//字体
+     * @param outFile	//输出文件
+     * @param width	//宽度
+     * @param height	//高度
+     * @throws Exception
+     */
+    public BufferedImage createImage(
+    		String str
+    		//,File outFile
+    		) throws Exception {  
+        // 创建图片  
+        Font font = new Font("宋体", Font.PLAIN, 80);
+        
+        Integer width = str.length() * 70;
+        Integer height = 150;
+        
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_BGR);  
+        Graphics g = image.getGraphics();  
+        g.setClip(0, 0, width, height);  
+        g.setColor(Color.white);  
+        g.fillRect(0, 0, width, height);// 先用黑色填充整张图片,也就是背景  
+        g.setColor(Color.black);// 在换成黑色  
+        g.setFont(font);// 设置画笔字体  
+        
+        //设置水印的坐标
+        int x = 50;
+        int y = height - 50;
+        g.drawString(str, x, y);  //画出水印
+        g.dispose();  
+        
+        //ImageIO.write(image, "png", outFile);// 输出png图片
+        
+        return image;
+    }  
+    
+    /**
+     * 在原图上生成水印
+     * @param waterMarkContent 水印内容
+     * @param markContentColor 水印颜色
+     */
+    public BufferedImage addWaterMark(InputStream is, String waterMarkContent, Color markContentColor) {
+        try {
+            Font font = new Font("宋体", Font.PLAIN, 80);
+            // 读取原图片信息
+            Image srcImg = ImageIO.read(is);//文件转化为图片
+            int srcImgWidth = srcImg.getWidth(null);//获取图片的宽
+            int srcImgHeight = srcImg.getHeight(null);//获取图片的高
+            
+            // 加水印
+            BufferedImage bufImg = new BufferedImage(srcImgWidth, srcImgHeight, BufferedImage.TYPE_INT_RGB);
+            Graphics2D g = bufImg.createGraphics();
+            g.drawImage(srcImg, 0, 0, srcImgWidth, srcImgHeight, null);
+            g.setColor(markContentColor); //根据图片的背景设置水印颜色
+            g.setFont(font);//设置字体
+
+            //设置水印的坐标
+            int x = 20;
+            int y = srcImgHeight - 60;
+            g.drawString(waterMarkContent, x, y);  //画出水印
+            g.dispose();
+            return bufImg;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+	
+	public static void main(String[] args) {
+		String clientUrl = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540878579376&di=16452e2f4cc5101e6119e30107a80325&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F0125fd5770dfa50000018c1b486f15.jpg%401280w_1l_2o_100sh.jpg";
+		String pressText = "测试水印asdasdasd";
+		ResultBean result = new CameraTool(new MvsCamera(clientUrl,pressText,1,1)).getImage();
+		LOGGER.info("返回结果：" + result.toString());
+	}
 }

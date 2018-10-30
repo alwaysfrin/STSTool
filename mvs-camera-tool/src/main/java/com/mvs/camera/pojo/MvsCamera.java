@@ -21,6 +21,9 @@ public class MvsCamera {
 	@ApiParam("图片压缩程度，1 不压缩，2，3，5 最大化压缩")
 	private int imageSize = 1;
 
+	@ApiParam("水印文字")
+	private String pressText;
+
 	public MvsCamera() {
 		super();
 	}
@@ -36,9 +39,10 @@ public class MvsCamera {
 		this.imageSize = imageSize;
 	}
 
-	public MvsCamera(String clientUrl, int imageType, int imageSize) {
+	public MvsCamera(String clientUrl,String pressText, int imageType, int imageSize) {
 		super();
 		this.clientUrl = clientUrl;
+		this.pressText = pressText;
 		this.imageType = imageType;
 		this.imageSize = imageSize;
 	}
@@ -65,6 +69,14 @@ public class MvsCamera {
 
 	public void setImageSize(int imageSize) {
 		this.imageSize = imageSize;
+	}
+
+	public String getPressText() {
+		return pressText;
+	}
+
+	public void setPressText(String pressText) {
+		this.pressText = pressText;
 	}
 
 	@Override

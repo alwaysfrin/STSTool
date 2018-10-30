@@ -28,9 +28,9 @@ public class CameraTool {
 	public ResultBean getImage() {
 		ResultBean result;
 		if(camera.getImageType() == 1) {
-			result = requestProxy.doImageGet(camera.getClientUrl(),"jpg",camera.getImageSize());
+			result = requestProxy.doImageGet(camera.getClientUrl(),camera.getPressText(), "jpg",camera.getImageSize());
 		} else if(camera.getImageType() == 2){
-			result = requestProxy.doImageGet(camera.getClientUrl(),"bmp",camera.getImageSize());
+			result = requestProxy.doImageGet(camera.getClientUrl(),camera.getPressText(), "bmp",camera.getImageSize());
 		}else {
 			result = new ResultBean(false, "暂不支持此图片类型。");
 		}

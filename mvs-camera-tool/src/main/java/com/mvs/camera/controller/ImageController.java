@@ -34,8 +34,8 @@ public class ImageController {
 
 	@ResponseBody
 	@RequestMapping(value="/take-picture")
-	public ResultBean takePicture(HttpServletResponse response,String clientUrl,int imageType,int imageSize) throws IOException {
-		ResultBean result = new CameraTool(new MvsCamera(clientUrl,imageType,imageSize)).getImage();
+	public ResultBean takePicture(HttpServletResponse response,String clientUrl, String pressText,int imageType,int imageSize) throws IOException {
+		ResultBean result = new CameraTool(new MvsCamera(clientUrl,pressText,imageType,imageSize)).getImage();
 		LOGGER.info("返回结果：" + result.toString());
 		
 		return result;
