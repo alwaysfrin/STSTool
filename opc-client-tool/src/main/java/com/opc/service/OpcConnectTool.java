@@ -124,7 +124,7 @@ public class OpcConnectTool {
 	         * param3 : 查询频率（异步使用）
 	         * param4 : 不工作占比
 	         */
-	        OpcGroup editGroup = new OpcGroup("opcquerygroup", true, OpcModel.UPDATE_RATE, 0.0f);
+	        OpcGroup editGroup = new OpcGroup("opceditgroup", true, OpcModel.UPDATE_RATE, 0.0f);
 	        editGroup.addItem(editItem);
 	        jopc.addGroup(editGroup);
 	        jopc.connect();
@@ -140,12 +140,8 @@ public class OpcConnectTool {
 		        LOGGER.error("【"+server.getItemName()+"】注册失败，继续尝试调用 ...");
 	        }
 	
-	        synchronized(this) {
-	            this.wait(50);
-	        }
 	        OpcItem responseItem = jopc.synchReadItem(editGroup, editItem);
 	        LOGGER.info("【获取opc-Item数据】" + responseItem);
-	        
 	        responseItem.setValue(new Variant(editValue));
             jopc.synchWriteItem(editGroup,responseItem);
 	        LOGGER.info("【写入数据："+editValue+"】");
