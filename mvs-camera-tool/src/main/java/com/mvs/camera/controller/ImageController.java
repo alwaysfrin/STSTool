@@ -36,7 +36,7 @@ public class ImageController {
 	@RequestMapping(value="/take-picture")
 	public ResultBean takePicture(HttpServletResponse response,String clientUrl, String pressText,int imageType,int imageSize) throws IOException {
 		ResultBean result = new CameraTool(new MvsCamera(clientUrl,pressText,imageType,imageSize)).getImage();
-		LOGGER.info("返回结果：" + result.toString());
+		LOGGER.info("获取照片结果："+result.isSuccess()+"，返回信息：" + result.toString());
 		
 		return result;
 	}
@@ -87,5 +87,17 @@ public class ImageController {
         		out.close();
         	}
         }
+	}
+
+	@ResponseBody
+	@RequestMapping(value="/test")
+	public ResultBean testPicture() throws IOException {
+		String clientUrl = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540878579376&di=16452e2f4cc5101e6119e30107a80325&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F0125fd5770dfa50000018c1b486f15.jpg%401280w_1l_2o_100sh.jpg";
+		String pressText = "测试水印asdasdasd";
+		long l1 = System.currentTimeMillis();
+		ResultBean result = new CameraTool(new MvsCamera(clientUrl,pressText,1,1)).getImage();
+		LOGGER.info("返回结果：" + result.toString() + "，耗时：" + (System.currentTimeMillis() - l1));
+		
+		return result;
 	}
 }
